@@ -1,0 +1,237 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Privacy Policy | HardwarePro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#00e5ff;
+  --accent:#22c55e;
+  --glass:rgba(255,255,255,.12);
+}
+*{font-family:'Poppins',sans-serif}
+
+body{
+  background:radial-gradient(circle at top,#0f2027,#020617 75%);
+  color:#e5e7eb;
+}
+
+/* NAVBAR */
+.navbar{
+  background:rgba(0,0,0,.6);
+  backdrop-filter:blur(18px);
+  box-shadow:0 10px 40px rgba(0,0,0,.85);
+}
+
+/* HERO */
+.hero{
+  padding:160px 0 90px;
+  text-align:center;
+}
+.hero h1{
+  font-weight:700;
+  font-size:3rem;
+}
+.hero span{color:var(--primary)}
+.hero p{
+  max-width:760px;
+  margin:auto;
+  color:#94a3b8;
+}
+
+/* TRUST STRIP */
+.trust-strip{
+  background:rgba(255,255,255,.08);
+  border-radius:26px;
+  padding:40px;
+  margin-top:-50px;
+  box-shadow:0 30px 80px rgba(0,0,0,.9);
+}
+.trust-strip i{
+  font-size:38px;
+  color:var(--primary);
+}
+
+/* POLICY CARD */
+.policy-box{
+  background:var(--glass);
+  backdrop-filter:blur(20px);
+  border-radius:32px;
+  padding:60px;
+  margin-top:80px;
+  box-shadow:0 45px 120px rgba(0,0,0,.9);
+  animation:fadeUp .9s ease;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:none}
+}
+
+.policy-section{
+  margin-top:45px;
+}
+.policy-section h4{
+  color:var(--primary);
+  font-weight:600;
+  margin-bottom:12px;
+}
+.policy-section p, li{
+  color:#cbd5e1;
+  line-height:1.7;
+}
+.policy-section ul{
+  padding-left:20px;
+}
+
+/* HIGHLIGHT */
+.highlight{
+  background:rgba(34,197,94,.12);
+  border-left:4px solid var(--accent);
+  padding:18px 22px;
+  border-radius:14px;
+  margin-top:30px;
+  color:#bbf7d0;
+}
+
+/* FOOTER */
+footer{
+  background:#000;
+  margin-top:100px;
+}
+footer a{
+  color:#94a3b8;
+  text-decoration:none;
+  margin:0 8px;
+}
+footer a:hover{color:var(--primary)}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-info" href="{% url 'dashboard' %}">
+      <i class="bi bi-tools"></i> HardwarePro
+    </a>
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="nav-link text-light" href="{% url 'dashboard' %}">Home</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <h1>Your Privacy. <span>Our Responsibility.</span></h1>
+    <p class="mt-3">
+      HardwarePro is built with security-by-design.
+      This page explains how we protect your data, your identity and your trust.
+    </p>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="container">
+  <div class="trust-strip row text-center g-4">
+    <div class="col-md-4">
+      <i class="bi bi-shield-lock-fill"></i>
+      <h6 class="mt-2">Enterprise-grade Security</h6>
+      <small>Encryption • Secure APIs • Access Control</small>
+    </div>
+    <div class="col-md-4">
+      <i class="bi bi-globe2"></i>
+      <h6 class="mt-2">Global Compliance Ready</h6>
+      <small>GDPR • Data Minimization • Audit Trails</small>
+    </div>
+    <div class="col-md-4">
+      <i class="bi bi-check-circle-fill"></i>
+      <h6 class="mt-2">Trusted by Businesses</h6>
+      <small>Suppliers • Retailers • Customers</small>
+    </div>
+  </div>
+</div>
+
+<!-- POLICY CONTENT -->
+<div class="container">
+  <div class="policy-box">
+
+    <p class="text-muted">Last updated: January 2026</p>
+
+    <div class="policy-section">
+      <h4>1. Information We Collect</h4>
+      <p>
+        We collect only what is necessary — such as name, contact details,
+        order information and platform usage data — to operate HardwarePro
+        securely and efficiently.
+      </p>
+    </div>
+
+    <div class="policy-section">
+      <h4>2. How We Use Your Data</h4>
+      <ul>
+        <li>Order processing and supplier verification</li>
+        <li>Customer support and communication</li>
+        <li>Fraud prevention and platform security</li>
+        <li>Analytics to improve user experience</li>
+      </ul>
+    </div>
+
+    <div class="policy-section">
+      <h4>3. Data Protection & Security</h4>
+      <p>
+        Your data is protected using industry-standard encryption,
+        role-based access controls and secure infrastructure.
+      </p>
+    </div>
+
+    <div class="policy-section">
+      <h4>4. Third-Party Services</h4>
+      <p>
+        Payments, notifications and analytics may be processed by
+        trusted third-party providers who follow strict security standards.
+      </p>
+    </div>
+
+    <div class="policy-section">
+      <h4>5. Your Rights & Control</h4>
+      <p>
+        You have full control over your data.
+        You may request access, correction or deletion at any time.
+      </p>
+    </div>
+
+    <div class="highlight">
+      🔐 HardwarePro follows a <strong>privacy-first approach</strong> —
+      we never sell your data and collect only what’s required to serve you better.
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="text-center py-4">
+  <div class="mb-2">
+    <a href="{% url 'privacy_policy' %}">Privacy</a>•
+    <a href="{% url 'terms' %}">Terms</a>•
+    <a href="{% url 'refund_policy' %}">Refund</a>•
+    <a href="{% url 'shipping_policy' %}">Shipping</a>•
+    <a href="{% url 'cookie_policy' %}">Cookies</a>
+  </div>
+  <div class="text-muted small">
+    © 2026 HardwarePro • Secure • Transparent • Trusted
+  </div>
+</footer>
+
+</body>
+</html>

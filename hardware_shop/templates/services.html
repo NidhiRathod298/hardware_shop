@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hardware Shop Services - Ultra Bomb</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<!-- AOS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0; padding: 0;
+    background: #0a0a0a;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* --- HEADER --- */
+.navbar { background: rgba(0,0,0,0.85); }
+.navbar-brand { color: #00c6ff; font-weight:700; font-size:1.5rem; }
+.nav-link { color:#fff; font-weight:500; }
+.nav-link:hover { color:#00c6ff; }
+
+/* --- FLOATING ICONS --- */
+#floatingIcons { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow:hidden; z-index:0; }
+.ficon { position: absolute; color: #00c6ff; font-size: 30px; opacity:0.2; animation: float 20s linear infinite; }
+@keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg); opacity:0.2; }
+    50% { opacity:0.6; }
+    100% { transform: translateY(-100vh) rotate(360deg); opacity:0.2; }
+}
+
+/* --- HERO --- */
+.hero {
+    height: 90vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; position: relative; z-index:1;
+}
+.hero h1 { font-size: 3rem; font-weight: 700; color: #00c6ff; margin-bottom: 20px;
+    animation: glow 2s ease-in-out infinite alternate; }
+.hero p { font-size: 1.2rem; margin-bottom: 30px; color: #fff; }
+@keyframes glow { 0% { text-shadow:0 0 10px #00c6ff,0 0 20px #00c6ff; } 100% { text-shadow:0 0 30px #00c6ff,0 0 60px #0072ff; } }
+.btn-hero { background: linear-gradient(90deg,#00c6ff,#0072ff); color:#fff; font-weight:500; border-radius:50px; padding:12px 35px; transition:all 0.3s ease; }
+.btn-hero:hover { transform:scale(1.1); box-shadow:0 0 30px #00c6ff,0 0 60px #0072ff; }
+
+/* --- 3D SERVICE CARDS --- */
+.section-title { color: #00c6ff; text-align:center; margin-bottom:50px; font-size:2rem; }
+.service-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(15px); border-radius: 20px; padding: 30px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; perspective:1000px; }
+.service-card-inner { transition: transform 0.5s; }
+.service-card:hover .service-card-inner { transform: rotateY(10deg) rotateX(10deg); }
+.service-icon { font-size:50px; color:#00c6ff; margin-bottom:20px; }
+
+/* --- TIMELINE --- */
+.timeline { position: relative; padding: 50px 0; max-width: 900px; margin:auto; }
+.timeline::before {
+    content:''; position:absolute; left:50%; top:0; transform:translateX(-50%);
+    width:4px; height:100%; background:#00c6ff;
+}
+.timeline-item { position: relative; width:50%; padding:20px 40px; box-sizing:border-box; }
+.timeline-item.left { left:0; text-align:right; }
+.timeline-item.right { left:50%; text-align:left; }
+.timeline-item::before {
+    content:''; position:absolute; top:20px; width:20px; height:20px;
+    background:#00c6ff; border-radius:50%; border:3px solid #fff;
+}
+.timeline-item.left::before { right:-10px; }
+.timeline-item.right::before { left:-10px; }
+
+/* --- TESTIMONIALS --- */
+.testimonial-card {
+    background: rgba(255,255,255,0.05); backdrop-filter: blur(15px);
+    border-radius: 20px; padding: 30px; text-align:center;
+    transition: transform 0.4s; margin:auto;
+}
+.testimonial-card:hover { transform: translateY(-10px); }
+.testimonial-card p { font-style: italic; }
+.testimonial-card h5 { margin-top:15px; color:#00c6ff; }
+
+/* --- RESPONSIVE --- */
+@media(max-width:768px){
+    .service-card{ margin-bottom:20px; }
+    .timeline-item{width:100%; text-align:left !important; padding:20px 20px; left:0 !important; }
+    .timeline-item::before{left:-10px;}
+}
+</style>
+</head>
+<body>
+
+<!-- FLOATING ICONS -->
+<div id="floatingIcons"></div>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar navbar-expand-lg fixed-top">
+<div class="container">
+ <a class="navbar-brand fw-bold text-info" href="{% url 'dashboard' %}">
+  <i class="bi bi-tools"></i> HardwarePro
+ </a>
+
+ <button class="navbar-toggler bg-light" data-bs-toggle="collapse" data-bs-target="#nav">
+  <span class="navbar-toggler-icon"></span>
+ </button>
+
+ <div class="collapse navbar-collapse" id="nav">
+  <ul class="navbar-nav ms-auto gap-3 align-items-center">
+ <li><a class="nav-link" href="{% url 'dashboard' %}">Home</a></li>
+   <li><a class="nav-link" href="{% url 'categories' %}">Categories</a></li>
+   <li><a class="nav-link" href="{% url 'products' %}">Products</a></li>
+  <li><a class="nav-link" href="{% url 'services' %}">Services</a></li>
+   <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About Us</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact Us</a></li>
+
+
+   {% if request.session.supplier_id %}
+   <li>
+    <a class="nav-link text-info fw-semibold"
+       href="{% url 'supplier_dashboard' %}">
+     Supplier Dashboard
+    </a>
+   </li>
+   <li>
+    <a class="btn btn-danger btn-sm"
+       href="{% url 'supplier_logout' %}">Logout</a>
+   </li>
+
+   {% elif user.is_authenticated %}
+   <li>
+    <a class="btn btn-danger btn-sm"
+       href="{% url 'logout' %}">Logout</a>
+   </li>
+
+   {% else %}
+   <li>
+    <a class="btn btn-outline-light btn-sm"
+       href="{% url 'login' %}">User Login</a>
+   </li>
+   <li>
+    <a class="btn btn-primary btn-sm"
+       href="{% url 'supplier_login' %}">Supplier Login</a>
+   </li>
+   {% endif %}
+  </ul>
+ </div>
+</div>
+</nav>
+
+
+<div class="overlay">
+
+<!-- HERO -->
+<section class="hero" data-aos="fade-down">
+<h1>Pre-Sale & Post-Sale Excellence</h1>
+<p>We don’t just sell tools—we provide expert guidance, warranties, and support for your projects.</p>
+<a href="#preSaleSection" class="btn btn-hero btn-lg">Explore Services</a>
+</section>
+
+<!-- PRE-SALE SERVICES -->
+<section id="preSaleSection" class="container py-5">
+<h2 class="section-title" data-aos="fade-up">Pre-Sale Services</h2>
+<div class="row g-4">
+  <div class="col-md-4" data-aos="fade-up" data-aos-delay="50">
+    <div class="service-card">
+      <div class="service-card-inner">
+      <i class="bi bi-lightbulb service-icon"></i>
+      <h4>Consultation</h4>
+      <p>Expert guidance to choose the right tools and materials.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+    <div class="service-card">
+      <div class="service-card-inner">
+      <i class="bi bi-box-seam service-icon"></i>
+      <h4>Product Demo</h4>
+      <p>Hands-on demo of tools for better understanding.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
+    <div class="service-card">
+      <div class="service-card-inner">
+      <i class="bi bi-pencil-square service-icon"></i>
+      <h4>Custom Orders</h4>
+      <p>We source specialized tools to meet unique needs.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- POST-SALE SERVICES -->
+<section id="postSaleSection" class="container py-5">
+<h2 class="section-title" data-aos="fade-up">Post-Sale Services</h2>
+<div class="row g-4">
+  <div class="col-md-4" data-aos="fade-up" data-aos-delay="50">
+    <div class="service-card">
+      <div class="service-card-inner">
+      <i class="bi bi-wrench service-icon"></i>
+      <h4>Installation</h4>
+      <p>Setup assistance for tools and equipment.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+    <div class="service-card">
+      <div class="service-card-inner">
+      <i class="bi bi-tools service-icon"></i>
+      <h4>Maintenance</h4>
+      <p>On-site maintenance and repair services.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
+    <div class="service-card">
+      <div class="service-card-inner">
+      <i class="bi bi-shield-check service-icon"></i>
+      <h4>Warranty & Guarantee</h4>
+      <p>Full product warranty and service guarantee.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- WARRANTY TIMELINE -->
+<section class="timeline py-5 container" data-aos="fade-up">
+<h2 class="section-title text-center mb-5">Warranty & Service Timeline</h2>
+<div class="timeline-item left">
+  <h5>Purchase</h5>
+  <p>Receive product and warranty card immediately.</p>
+</div>
+<div class="timeline-item right">
+  <h5>30 Days</h5>
+  <p>Free setup support and initial inspection.</p>
+</div>
+<div class="timeline-item left">
+  <h5>6 Months</h5>
+  <p>Maintenance check-up and minor repairs covered.</p>
+</div>
+<div class="timeline-item right">
+  <h5>1 Year</h5>
+  <p>Warranty service for defective products.</p>
+</div>
+</section>
+
+<!-- TESTIMONIALS WITH CAROUSEL -->
+<section class="container py-5">
+<h2 class="section-title text-center mb-5" data-aos="fade-up">What Our Customers Say</h2>
+
+<div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-aos="fade-up">
+  <div class="carousel-inner">
+
+    <div class="carousel-item active">
+      <div class="testimonial-card p-4 text-center mx-auto" style="max-width:600px;">
+        <p>"Amazing consultation! Helped me choose the right tools for my workshop."</p>
+        <h5>- John D.</h5>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <div class="testimonial-card p-4 text-center mx-auto" style="max-width:600px;">
+        <p>"Fast installation and excellent post-sale support. Highly recommend!"</p>
+        <h5>- Sarah W.</h5>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <div class="testimonial-card p-4 text-center mx-auto" style="max-width:600px;">
+        <p>"Custom order fulfilled perfectly and on time. Great service."</p>
+        <h5>- Ahmed K.</h5>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <div class="testimonial-card p-4 text-center mx-auto" style="max-width:600px;">
+        <p>"The warranty process was smooth and hassle-free. Very satisfied."</p>
+        <h5>- Priya M.</h5>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <div class="testimonial-card p-4 text-center mx-auto" style="max-width:600px;">
+        <p>"Helpful pre-sale advice saved me time and money. Excellent team!"</p>
+        <h5>- Carlos T.</h5>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Controls -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+
+  <!-- Indicators -->
+  <div class="carousel-indicators mt-3">
+    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2"></button>
+    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="3"></button>
+    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="4"></button>
+  </div>
+</div>
+</section>
+
+</div> <!-- overlay -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+// --- AOS Init ---
+AOS.init({duration:800,once:true});
+
+// --- Floating icons ---
+const icons = ['bi-hammer','bi-wrench','bi-tools','bi-box-seam','bi-lightning-charge'];
+const floatingContainer=document.getElementById('floatingIcons');
+for(let i=0;i<20;i++){
+    const ico=document.createElement('i');
+    ico.className='bi '+icons[Math.floor(Math.random()*icons.length)]+' ficon';
+    ico.style.left=Math.random()*100+'%';
+    ico.style.fontSize=(20+Math.random()*40)+'px';
+    ico.style.animationDuration=(15+Math.random()*10)+'s';
+    floatingContainer.appendChild(ico);
+}
+</script>
+</body>
+</html>

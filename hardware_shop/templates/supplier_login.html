@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Supplier Login | HardwarePro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top left,#00c6ff25,transparent 40%),
+    radial-gradient(circle at bottom right,#0072ff25,transparent 40%),
+    linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  font-family:'Poppins',sans-serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+}
+
+.login-box{
+  position:relative;
+  width:100%;
+  max-width:420px;
+  background:rgba(255,255,255,0.10);
+  backdrop-filter:blur(18px);
+  border-radius:26px;
+  padding:40px 35px;
+  box-shadow:0 45px 120px rgba(0,0,0,.7);
+}
+
+/* BACK */
+.back-link{
+  position:absolute;
+  top:18px;
+  left:22px;
+  font-size:14px;
+  color:#9fdfff;
+  text-decoration:none;
+}
+.back-link:hover{color:#fff}
+
+/* BRAND */
+.brand{font-weight:700;color:#00c6ff}
+.subtitle{font-size:14px;color:#ccc}
+
+/* INPUT */
+.form-control{
+  background:rgba(255,255,255,.15);
+  border:none;
+  border-radius:14px;
+  padding:12px 14px;
+  color:#fff;
+}
+.form-control::placeholder{color:#ccc}
+
+/* BUTTON */
+.btn-login{
+  background:linear-gradient(135deg,#00c6ff,#0072ff);
+  border:none;
+  border-radius:14px;
+  padding:12px;
+  font-weight:600;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+ <!-- BACK TO REGISTER -->
+ <a href="{% url 'supplier_register' %}" class="back-link">← Back</a>
+
+ <h3 class="text-center mb-1">
+  <span class="brand">HardwarePro</span>
+ </h3>
+ <p class="text-center subtitle mb-4">
+  Supplier Secure Login
+ </p>
+
+ <!-- LOGIN FORM -->
+ <form id="loginForm">
+  {% csrf_token %}
+
+  <input class="form-control mb-3"
+         name="owner_name"
+         placeholder="Owner Name"
+         required>
+
+  <input class="form-control mb-3"
+         type="password"
+         name="password"
+         placeholder="Password"
+         required>
+
+  <button type="submit" class="btn btn-login w-100 mt-2">
+   Login to Dashboard
+  </button>
+ </form>
+
+ <div class="d-flex justify-content-between mt-4">
+  <a href="{% url 'supplier_forgot_password' %}" class="text-info">
+    Forgot Password?
+  </a>
+  <a href="{% url 'supplier_register' %}" class="btn btn-outline-info btn-sm">
+    Register
+  </a>
+ </div>
+
+</div>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  let formData = new FormData(this);
+
+  fetch("{% url 'supplier_login' %}", {
+    method: "POST",
+    headers: {
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data.status === "success"){
+      Swal.fire({
+        icon: "success",
+        title: "Login Successful",
+        text: "Welcome to Supplier Dashboard",
+        timer: 1500,
+        showConfirmButton: false
+      }).then(() => {
+        window.location.href = "{% url 'supplier_dashboard' %}";
+      });
+    } else if(data.status === "not_registered"){
+      Swal.fire({
+        icon: "warning",
+        title: "Not Registered",
+        text: "Please register first before login"
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: data.message
+      });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
