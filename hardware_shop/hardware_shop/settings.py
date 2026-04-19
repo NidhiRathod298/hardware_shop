@@ -85,7 +85,7 @@ TEMPLATES = [
 # =========================
 # WSGI
 # =========================
-WSGI_APPLICATION = 'hardware_shop.wsgi.application'
+WSGI_APPLICATION = 'hardware_shop.hardware_shop.wsgi.application'
 
 
 # =========================
